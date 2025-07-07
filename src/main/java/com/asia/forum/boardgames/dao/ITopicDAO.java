@@ -1,6 +1,5 @@
 package com.asia.forum.boardgames.dao;
 
-import com.asia.forum.boardgames.model.Post;
 import com.asia.forum.boardgames.model.Topic;
 
 import java.util.List;

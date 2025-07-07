@@ -2,7 +2,6 @@ package com.asia.forum.boardgames.controllers;
 
 import com.asia.forum.boardgames.dao.IPostDAO;
 import com.asia.forum.boardgames.dao.ITopicDAO;
-import com.asia.forum.boardgames.model.Post;
 import com.asia.forum.boardgames.model.Topic;
 import com.asia.forum.boardgames.model.User;
 import jakarta.servlet.http.HttpSession;
@@ -12,13 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
