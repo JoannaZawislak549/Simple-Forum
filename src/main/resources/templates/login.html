@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{fragments.html :: headers}"></th:block>
+  <link rel="stylesheet" href="authentication.css">
+</head>
+<body>
+
+  <div th:replace="~{fragments.html :: forum-header}"></div>
+
+  <div class="container">
+  <form method="post">
+    <input class="text-field" type="text" placeholder="Login" name="login">
+    <input class="text-field" type="password" placeholder="Hasło" name="password">
+    <input class="button" type="submit" value="Zaloguj">
+  </form>
+  <p>Nie masz konta ?? <a href="/register">Zarejestruj</a></p>
+  </div>
+</body>
+</html>

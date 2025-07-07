@@ -1,0 +1,65 @@
+.container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input fields */
+.text-field {
+
+    padding: 15px 10px;
+    margin: 0 auto 10px auto;  /* top:0, right:auto, bottom:10px, left:auto */
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 25vw; /* or any desired width */
+    display: block;
+}
+
+/* Submit button */
+.button {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    padding: 10px;
+    font-size: 20px;
+    background: linear-gradient(135deg,#0e1b47, #10285c,
+    #152f6c,#344c9a, #1b4992, #1459a3, #3d387d);
+    color: white;
+    font-family: 'MedievalSharp', cursive;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #0e4c8a;
+    transition: scale(1.05);
+}
+
+/* Text below form */
+p {
+    display: block;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+p a {
+    color: #152f6c;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

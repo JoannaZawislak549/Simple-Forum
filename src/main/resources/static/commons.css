@@ -1,0 +1,81 @@
+
+/* Import a fantasy-themed Google Font */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+body {
+    font-family: 'MedievalSharp', cursive;
+    margin: 0;
+    padding: 10px;
+    background-color: white;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    height: 40vh;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: linear-gradient(135deg,#0e1b47, #10285c,
+    #152f6c,#344c9a, #1b4992, #1459a3, #3d387d);
+    background-size: 300% 300%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 10px 10px;
+    animation: gradientShift 20s ease infinite;
+}
+
+#logo, #banner {
+    display: inline-block;
+    width: auto;
+    height: 40vh;
+}
+
+/* Magical background effect */
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+#search-bar {
+    font-size: 20px;
+}
+
+.auth-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.auth-buttons a{
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    text-align: center;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.auth-buttons a:hover {
+    transform: scale(1.05);
+}
+
+.navigation-section a {
+    color: #0e1b47;
+    font-size: 20px;
+    margin-top: 60px;
+    margin: 10px 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+
+

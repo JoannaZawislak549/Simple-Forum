@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments.html :: headers}"></th:block>
+    <link rel="stylesheet" href="authentication.css">
+    <link rel="stylesheet" href="new-topic.css">
+</head>
+<body>
+<div th:replace="~{fragments.html :: forum-header}"></div>
+<div class="container">
+    <form method="post">
+
+        <label for="title">Tytuł tematu:</label>
+        <input type="text" id="title" name="title" maxlength="100" required th:field="*{topic.title}">
+
+        <label for="content">Treść posta:</label>
+        <textarea id="content" name="content" rows="10" required th:field="*{post.content}"></textarea>
+
+        <button type="submit">📬 Opublikuj temat</button>
+    </form>
+</div>
+</body>
+</html>

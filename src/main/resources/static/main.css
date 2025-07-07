@@ -1,0 +1,40 @@
+.main-content {
+  width: 100%;
+}
+
+
+.forum-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-size: 20px;
+}
+
+.forum-table thead {
+  background-color: #182d6b;
+  color: white;
+}
+
+.forum-table th,
+.forum-table td {
+  border: 1px solid #182d6b;
+  padding: 12px;
+  vertical-align: top;
+  font-size: 20px;
+}
+
+.forum-table .author {
+  color: #142549;
+  font-size: 15px;
+}
+
+.forum-table .last-post {
+  font-size: 15px;
+  color: #142549;
+}
+
+.forum-table tr:nth-child(even):not(.highlighted) {
+  background-color: #cfdbff;
+}
+

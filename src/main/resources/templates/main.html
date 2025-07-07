@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments.html :: headers}"></th:block>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{fragments.html :: forum-header}"></div>
+
+    <div class="main-content">
+        <table class="forum-table">
+            <thead>
+                <tr>
+                    <th>TEMATY</th>
+                    <th>ODPOWIEDZI</th>
+                    <th>ODSŁONY</th>
+                    <th>OSTATNI POST</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="topic : ${topics}">
+                    <td>
+                        <strong>
+                            <a th:href="@{/topics/{id}(id=${topic.id})}" th:text="${topic.title}"></a>
+                        </strong><br>
+                        <span class="author"> Autor: <span th:text="${topic.author}"></span>
+                            <span th:text="${#temporals.format(topic.date, 'dd.MM.yyyy, HH:mm')}"></span></span>
+                    </td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td class="last-post">
+                        Autor: <span th:text="${posts.getLastPostAuthor(topic.id)}"></span>
+                        Data: <span th:text="${#temporals.format(posts.getLastPostDate(topic.id), 'dd.MM.yyyy, HH:mm')}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+/* faq-container.css */
+
+/* Container for the FAQ section */
+.faq-container {
+    background-color: #f9f9f9; /* light background for better readability */
+    border-radius: 8px;        /* slightly rounded edges for modern look */
+    padding: 20px;             /* give some breathing space around content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+    margin: 20px 0;            /* spacing from other elements */
+}
+
+/* Headers inside the FAQ container */
+.faq-container h2 {
+    color: #333;              /* dark and readable text */
+    font-size: 1.8rem;        /* slightly larger size for header prominence */
+    margin-bottom: 15px;      /* spacing below the header */
+    border-bottom: 2px solid #ddd; /* underline for section separation */
+    padding-bottom: 5px;
+}
+
+.faq-container h3 {
+    color: #555;              /* medium-dark color for contrast */
+    font-size: 1.4rem;        /* smaller than h2 but still prominent */
+    margin-top: 20px;         /* spacing above FAQ item headers */
+    margin-bottom: 10px;      /* spacing below FAQ item headers */
+}
+
+/* FAQ items */
+.faq-container .faq-item {
+    margin-bottom: 15px;      /* space between individual FAQ items */
+    padding-bottom: 15px;     /* add spacing inside items */
+    border-bottom: 1px solid #ececec; /* light border for separation */
+}
+
+/* Paragraphs inside FAQ items */
+.faq-container p {
+    color: #666;              /* softer gray for text */
+    font-size: 1rem;          /* maintain readability without being too large */
+    line-height: 1.6;         /* comfortable line spacing */
+    margin: 5px 0;
+}
+
+.faq-container p strong {
+    color: #4CAF50;           /* highlight important text with green accent */
+}
+
+.faq-container a {
+    color: #007BFF;           /* link color similar to main.css style */
+    text-decoration: none;    /* remove underline for cleaner look */
+}
+
+.faq-container a:hover {
+    text-decoration: underline; /* underline on hover as feedback */
+}

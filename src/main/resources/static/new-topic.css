@@ -1,0 +1,75 @@
+/* new-topic.css - styl dedykowany dla strony dodawania nowego tematu */
+
+.container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #182d6b;
+    font-family: 'MedievalSharp', cursive;
+}
+
+.container input[type="text"] {
+    padding: 15px 10px;
+    margin-bottom: 18px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 25vw;
+    display: block;
+}
+
+textarea {
+    padding: 18px 12px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50vw;
+    min-width: 350px;
+    min-height: 300px;
+    max-width: 90vw;
+    margin-bottom: 18px;
+    font-family: inherit;
+    resize: vertical;
+    background: #f7f9ff;
+    box-shadow: 0 2px 8px rgba(24,45,107,0.07);
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    padding: 12px;
+    font-size: 20px;
+    background: linear-gradient(135deg,#0e1b47, #10285c, #152f6c,#344c9a, #1b4992, #1459a3, #3d387d);
+    color: white;
+    font-family: 'MedievalSharp', cursive;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0e4c8a;
+    scale: 1.05;
+}
+
+#reply {
+    display: block;
+    margin: 20px auto;
+    width: 50%;
+}
