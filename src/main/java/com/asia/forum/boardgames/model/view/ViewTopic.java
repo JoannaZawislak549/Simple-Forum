@@ -1,14 +1,17 @@
 package com.asia.forum.boardgames.model.view;
 
 import com.asia.forum.boardgames.model.Topic;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ViewTopic {
     private int id;
     private String title;

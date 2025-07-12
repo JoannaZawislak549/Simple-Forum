@@ -1,5 +1,4 @@
 package com.asia.forum.boardgames.services;
-
 import com.asia.forum.boardgames.model.User;
 
 public interface IAuthenticationService {

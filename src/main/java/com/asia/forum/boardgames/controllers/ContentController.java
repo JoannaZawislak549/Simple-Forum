@@ -4,7 +4,6 @@ import com.asia.forum.boardgames.model.Post;
 import com.asia.forum.boardgames.model.Topic;
 import com.asia.forum.boardgames.model.view.ViewTopic;
 import com.asia.forum.boardgames.services.IContentService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
