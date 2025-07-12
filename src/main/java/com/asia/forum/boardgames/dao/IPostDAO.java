@@ -1,7 +1,9 @@
 package com.asia.forum.boardgames.dao;
 
 import com.asia.forum.boardgames.model.Post;
+import com.asia.forum.boardgames.model.Topic;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface IPostDAO {
@@ -11,5 +13,6 @@ public interface IPostDAO {
     public void persistPost(Post post);
     public Post getLatestPostForTopicId(int topicId);
     public String getLastPostAuthor(int topicId);
+    HashMap<Integer, List<Post>> getAllPostsForTopics(List<Topic> topics);
 
 }

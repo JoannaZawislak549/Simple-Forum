@@ -15,7 +15,7 @@
     <h1 th:text="${topic.title}" class="topic-title">Tytuł Tematu</h1>
     <p class="meta-info">
       Autor: <span th:text="${topic.author}"></span> |
-      Data: <span th:text="${#temporals.format(topic.date, 'dd.MM.yyyy, HH:mm')}"></span>
+      Data: <span th:text="${topic.formattedDate}"></span>
     </p>
   </div>
 
@@ -25,7 +25,7 @@
       <div class="post" th:each="post : ${posts}">
         <div class="post-header">
           <span class="post-author" th:text="${post.author}">Autor</span>
-          <span class="post-date" th:text="${#temporals.format(post.date, 'dd.MM.yyyy, HH:mm')}">Data</span>
+          <span class="post-date" th:text="${post.formattedDate}">Data</span>
         </div>
         <div class="post-content" th:utext="${post.content}">
           Treść posta

@@ -1,5 +1,6 @@
-package com.asia.forum.boardgames.dao;
+package com.asia.forum.boardgames.dao.impl;
 
+import com.asia.forum.boardgames.dao.ITopicDAO;
 import com.asia.forum.boardgames.model.Topic;
 import org.springframework.stereotype.Component;
 

@@ -1,10 +1,12 @@
-package com.asia.forum.boardgames.dao;
+package com.asia.forum.boardgames.dao.impl;
 
+import com.asia.forum.boardgames.dao.IUserDAO;
 import com.asia.forum.boardgames.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserRepository implements IUserDAO {
@@ -31,12 +33,12 @@ public class UserRepository implements IUserDAO {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public Optional<User> getUserByLogin(String login) {
         for (User user : users) {
             if (user.getLogin().equals(login)) {
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }

@@ -30,6 +30,7 @@ label {
     border-radius: 5px;
     width: 25vw;
     display: block;
+    font-family: 'MedievalSharp', cursive;
 }
 
 textarea {

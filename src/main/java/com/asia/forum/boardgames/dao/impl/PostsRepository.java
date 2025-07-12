@@ -1,6 +1,8 @@
-package com.asia.forum.boardgames.dao;
+package com.asia.forum.boardgames.dao.impl;
 
+import com.asia.forum.boardgames.dao.IPostDAO;
 import com.asia.forum.boardgames.model.Post;
+import com.asia.forum.boardgames.model.Topic;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -184,6 +186,18 @@ public class PostsRepository implements IPostDAO {
             return latestPost.getAuthor();
         }
         return null;
+    }
+
+    @Override
+    public HashMap<Integer, List<Post>> getAllPostsForTopics(List<Topic> topics) {
+        HashMap<Integer, List<Post>> result = new HashMap<>();
+        for (Topic topic : topics) {
+            List<Post> postsForTopic = getAllPostsForTopicId(topic.getId());
+            if (postsForTopic != null && !postsForTopic.isEmpty()) {
+                result.put(topic.getId(), postsForTopic);
+            }
+        }
+        return result;
     }
 
     public LocalDateTime getLastPostDate(int topicId){
