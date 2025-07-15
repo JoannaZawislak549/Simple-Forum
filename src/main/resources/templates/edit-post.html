@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments.html :: headers}"></th:block>
+    <link rel="stylesheet" href="/new-topic.css">
+</head>
+<body>
+<div th:replace="~{fragments.html :: forum-header}"></div>
+<div class="container">
+    <form th:action="@{'/topics/' + ${topicId} + '/posts/' + ${post.id} + '/edit'}" method="post">
+        <label for="content">Edytuj treść:</label>
+        <textarea id="content" name="content" required th:text="${post.content}"></textarea>
+        <button type="submit">Zapisz zmiany</button>
+    </form>
+</div>
+</body>
+</html>

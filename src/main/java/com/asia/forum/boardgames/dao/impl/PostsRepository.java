@@ -208,4 +208,43 @@ public class PostsRepository implements IPostDAO {
         return null;
     }
 
+    @Override
+    public void updatePost(int topicId, int postId, String newContent) {
+        List<Post> topicPosts = posts.get(topicId);
+        if (topicPosts != null) {
+            for (Post post : topicPosts) {
+                if (post.getId() == postId) {
+                    post.setContent(newContent);
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deletePost(int topicId, int postId) {
+        List<Post> topicPosts = posts.get(topicId);
+        if (topicPosts != null) {
+            for (int i = 0; i < topicPosts.size(); i++) {
+                if (topicPosts.get(i).getId() == postId) {
+                    topicPosts.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public Post getPost(int topicId, int postId) {
+        List<Post> topicPosts = posts.get(topicId);
+        if (topicPosts != null) {
+            for (Post post : topicPosts) {
+                if (post.getId() == postId) {
+                    return post;
+                }
+            }
+        }
+        return null;
+    }
+
 }

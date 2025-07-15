@@ -52,7 +52,7 @@ textarea {
 button[type="submit"] {
     display: block;
     margin: 0 auto;
-    width: 50%;
+    width: 30%;
     padding: 12px;
     font-size: 20px;
     background: linear-gradient(135deg,#0e1b47, #10285c, #152f6c,#344c9a, #1b4992, #1459a3, #3d387d);
@@ -73,4 +73,29 @@ button[type="submit"]:hover {
     display: block;
     margin: 20px auto;
     width: 50%;
+}
+
+.topic-form {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.topic-form textarea {
+    width: 100%;
+    min-height: 300px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+.back-link {
+    color: #182d6b;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.back-link:hover {
+    text-decoration: underline;
 }

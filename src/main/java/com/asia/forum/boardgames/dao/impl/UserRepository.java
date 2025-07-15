@@ -21,7 +21,7 @@ public class UserRepository implements IUserDAO {
                 "ef9455e7352fc6711fd9452f30802349", User.Role.USER));
         this.users.add(new User(3, "PierwszyModerator", "moderator@testmail.com",
                 "0408f3c997f309c03b08bf3a4bc7b730", User.Role.MODERATOR));
-        this.users.add(new User(4, "janusz", "janusz1@testmail.com",
+        this.users.add(new User(4, "janusz1", "janusz1@testmail.com",
                 "1e6f2ac43951a6721d3d26a379cc7f8b", User.Role.USER));
     }
 

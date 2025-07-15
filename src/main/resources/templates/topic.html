@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <th:block th:replace="~{fragments.html :: headers}"></th:block>
-  <link rel="stylesheet" href="/topic.css">
-  <title th:text="'Temat: ' + ${topic.title}">Szczegóły Tematu</title>
-
+    <th:block th:replace="~{fragments.html :: headers}"></th:block>
+    <link rel="stylesheet" href="/topic.css">
+    <title th:text="'Temat: ' + ${topic.title}">Szczegóły Tematu</title>
 </head>
 <body>
 <div th:replace="~{fragments.html :: forum-header}"></div>
 <div class="container">
-
-  <div class="nav-section">
-    <a href="/main" class="back-link">← Powrót do forum</a>
-    <h1 th:text="${topic.title}" class="topic-title">Tytuł Tematu</h1>
-    <p class="meta-info">
-      Autor: <span th:text="${topic.author}"></span> |
-      Data: <span th:text="${topic.formattedDate}"></span>
-    </p>
-  </div>
-
-  <div class="main-content">
-    <h2>Posty</h2>
-    <div class="post-list">
-      <div class="post" th:each="post : ${posts}">
-        <div class="post-header">
-          <span class="post-author" th:text="${post.author}">Autor</span>
-          <span class="post-date" th:text="${post.formattedDate}">Data</span>
-        </div>
-        <div class="post-content" th:utext="${post.content}">
-          Treść posta
-        </div>
-      </div>
+    <div class="nav-section">
+        <a href="/main" class="back-link">← Powrót do forum</a>
+        <h1 th:text="${topic.title}" class="topic-title">Tytuł Tematu</h1>
+        <p class="meta-info">
+            Autor: <span th:text="${topic.author}"></span> |
+            Data: <span th:text="${topic.formattedDate}"></span>
+        </p>
     </div>
 
-    <hr>
+    <div class="main-content">
+        <h2>Posty</h2>
+        <div class="post-list">
+            <div class="post" th:each="post : ${posts}">
+                <div class="post-user">
+                    <div class="user-nick" th:text="${post.author}">Autor</div>
+                    <div class="post-date" th:text="${post.formattedDate}">Data</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-body" th:text="${post.content}">Treść posta</div>
+                    <div class="post-actions" th:if="${session.user != null && session.user.login == post.author}">
+                        <a th:href="@{'/topics/' + ${topic.id} + '/posts/' + ${post.id} + '/edit'}"
+                           th:id="'edit-button-' + ${post.id}">✏️ Edytuj</a>
+                        <form th:action="@{'/topics/' + ${topic.id} + '/posts/' + ${post.id} + '/delete'}"
+                              method="post" style="display: inline;"
+                              onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?')">
+                            <button type="submit" th:id="'delete-button-' + ${post.id}">🗑️ Usuń</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <h3 th:if="${session.user != null}">Dodaj odpowiedź</h3>
-    <form th:if="${session.user != null}" th:action="@{'/topics/' + ${topic.id} + '/reply'}" method="post">
-      <textarea id="reply" name="content" rows="6" cols="50" placeholder="Napisz swoją odpowiedź..." required></textarea><br>
-      <button type="submit" class="btn btn-submit">Wyślij</button>
-    </form>
-  </div>
+        <div class="reply-section" th:if="${session.user != null}">
+            <h3>Odpowiedz</h3>
+            <form th:action="@{'/topics/' + ${topic.id} + '/reply'}" method="post">
+                <textarea id="reply" name="content" required></textarea>
+                <button type="submit" class="btn">Odpowiedz</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

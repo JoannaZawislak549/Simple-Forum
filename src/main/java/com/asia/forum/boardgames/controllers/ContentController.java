@@ -65,4 +65,57 @@ public class ContentController {
         model.addAttribute("posts", this.contentService.getAllPostsForTopics(topics));
         return "main";
     }
+
+    @PostMapping("/topics/{topicId}/posts/{postId}/edit")
+    public String editPost(@PathVariable int topicId,
+                         @PathVariable int postId,
+                         @RequestParam String content,
+                         HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Post post = this.contentService.getPost(topicId, postId);
+        if (post != null && post.getAuthor().equals(user.getLogin())) {
+            this.contentService.updatePost(topicId, postId, content);
+        }
+        return "redirect:/topics/" + topicId;
+    }
+
+    @PostMapping("/topics/{topicId}/posts/{postId}/delete")
+    public String deletePost(@PathVariable int topicId,
+                           @PathVariable int postId,
+                           HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Post post = this.contentService.getPost(topicId, postId);
+        if (post != null && post.getAuthor().equals(user.getLogin())) {
+            this.contentService.deletePost(topicId, postId);
+        }
+        return "redirect:/topics/" + topicId;
+    }
+
+    @GetMapping("/topics/{topicId}/posts/{postId}/edit")
+    public String showEditPostForm(@PathVariable int topicId,
+                                 @PathVariable int postId,
+                                 Model model,
+                                 HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Post post = this.contentService.getPost(topicId, postId);
+        if (post == null || !post.getAuthor().equals(user.getLogin())) {
+            return "redirect:/topics/" + topicId;
+        }
+
+        model.addAttribute("post", post);
+        model.addAttribute("topicId", topicId);
+        return "edit-post";
+    }
 }

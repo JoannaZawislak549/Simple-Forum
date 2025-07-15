@@ -14,5 +14,7 @@ public interface IPostDAO {
     public Post getLatestPostForTopicId(int topicId);
     public String getLastPostAuthor(int topicId);
     HashMap<Integer, List<Post>> getAllPostsForTopics(List<Topic> topics);
-
+    void updatePost(int topicId, int postId, String newContent);
+    void deletePost(int topicId, int postId);
+    Post getPost(int topicId, int postId);
 }

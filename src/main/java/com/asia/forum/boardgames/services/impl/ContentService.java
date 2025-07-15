@@ -133,4 +133,19 @@ public class ContentService implements IContentService {
         }
         return matchedTopics;
     }
+
+    @Override
+    public void updatePost(int topicId, int postId, String newContent) {
+        this.postDAO.updatePost(topicId, postId, newContent);
+    }
+
+    @Override
+    public void deletePost(int topicId, int postId) {
+        this.postDAO.deletePost(topicId, postId);
+    }
+
+    @Override
+    public Post getPost(int topicId, int postId) {
+        return this.postDAO.getPost(topicId, postId);
+    }
 }

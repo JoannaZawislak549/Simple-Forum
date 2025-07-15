@@ -15,4 +15,7 @@ public interface IContentService {
     Post createReply(String content, int topicId, String author);
     HashMap<Integer, List<ViewPost>> getAllPostsForTopics(List<ViewTopic> topics);
     List<ViewTopic> searchTopicOrPost(String query);
+    void updatePost(int topicId, int postId, String newContent);
+    void deletePost(int topicId, int postId);
+    Post getPost(int topicId, int postId);
 }
