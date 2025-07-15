@@ -59,8 +59,8 @@ You can use these accounts to log in and test different roles:
 |-------------------|------------|-----------|
 | admin             | admin      | ADMIN     |
 | asia123           | asia123    | USER      |
-| PierwszyModerator | moderator1 | MODERATOR |
-| janusz            | janusz1    | USER      |
+| PierwszyModerator | moderator  | MODERATOR |
+| janusz            | janusz123  | USER      |
 
 ## Running the Application
 
