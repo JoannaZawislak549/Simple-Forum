@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments.html :: headers}"></th:block>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="my-posts.css">
+</head>
+<body>
+<div th:replace="~{fragments.html :: forum-header}"></div>
+<div class="container">
+    <div class="topics-section">
+        <h2>Moje tematy</h2>
+        <div class="topics" th:if="${userTopics != null && !userTopics.isEmpty()}">
+            <div class="topic" th:each="topic : ${userTopics}">
+                <div class="topic-header">
+                    <a th:href="@{'/topics/' + ${topic.id}}" th:text="${topic.title}" class="topic-title"></a>
+                </div>
+                <div class="topic-info">
+                    Data: <span th:text="${topic.formattedDate}"></span>
+                </div>
+            </div>
+        </div>
+        <div th:if="${userTopics.empty}" class="no-content">
+            Nie utworzyłeś jeszcze żadnych tematów.
+        </div>
+    </div>
+
+    <div class="posts-section">
+        <h2>Moje odpowiedzi</h2>
+        <div class="posts" th:if="${userPosts != null && !userPosts.isEmpty()}">
+            <div class="post" th:each="post : ${userPosts}">
+                <div class="post-content" th:text="${post.content}"></div>
+                <div class="post-info">
+                    <a th:href="@{'/topics/' + ${post.topicId}}" class="topic-link">Przejdź do tematu</a> |
+                    Data: <span th:text="${post.formattedDate}"></span>
+                </div>
+            </div>
+        </div>
+        <div th:if="${userPosts.empty}" class="no-content">
+            Nie napisałeś jeszcze żadnych odpowiedzi.
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -23,6 +23,7 @@
         <a href="/main" id="forum-title">Forum o Grach Planszowych</a>
         <a href="/faq" id="faq-link">FAQ</a>
         <a th:if="${session.user != null}" href="/new-topic" id="new-topic-link">Nowy temat</a>
+        <a th:if="${session.user != null}" href="/my-posts" id="my-posts-link">Moje tematy i posty</a>
         <form th:if="${session.user != null}" th:action="@{/search}" method="get" style="display:inline;">
             <input type="text" id="search-bar" name="q" placeholder="🔍 Szukaj w forum..." th:value="${searchQuery}">
         </form>

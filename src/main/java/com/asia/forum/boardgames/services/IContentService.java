@@ -18,4 +18,6 @@ public interface IContentService {
     void updatePost(int topicId, int postId, String newContent);
     void deletePost(int topicId, int postId);
     Post getPost(int topicId, int postId);
+    List<ViewTopic> getTopicsByAuthor(String author);
+    List<ViewPost> getPostsByAuthor(String author);
 }

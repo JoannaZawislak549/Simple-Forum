@@ -35,10 +35,4 @@ public class UserService implements IUserService {
         this.userDAO.updateUser(user);
     }
 
-    @Override
-    public void updatePassword(User user, String newPassword) {
-        String hashedPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
-        user.setPassword(hashedPassword);
-        this.userDAO.updateUser(user);
-    }
 }

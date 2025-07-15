@@ -47,8 +47,8 @@ public class ContentController {
 
     @PostMapping("/topics/{id}/reply")
     public String replyToTopic(@PathVariable("id") int topicId,
-                              @RequestParam("content") String content,
-                              HttpSession session) {
+                               @RequestParam("content") String content,
+                               HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -68,9 +68,9 @@ public class ContentController {
 
     @PostMapping("/topics/{topicId}/posts/{postId}/edit")
     public String editPost(@PathVariable int topicId,
-                         @PathVariable int postId,
-                         @RequestParam String content,
-                         HttpSession session) {
+                           @PathVariable int postId,
+                           @RequestParam String content,
+                           HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -85,8 +85,8 @@ public class ContentController {
 
     @PostMapping("/topics/{topicId}/posts/{postId}/delete")
     public String deletePost(@PathVariable int topicId,
-                           @PathVariable int postId,
-                           HttpSession session) {
+                             @PathVariable int postId,
+                             HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -101,9 +101,9 @@ public class ContentController {
 
     @GetMapping("/topics/{topicId}/posts/{postId}/edit")
     public String showEditPostForm(@PathVariable int topicId,
-                                 @PathVariable int postId,
-                                 Model model,
-                                 HttpSession session) {
+                                   @PathVariable int postId,
+                                   Model model,
+                                   HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -117,5 +117,17 @@ public class ContentController {
         model.addAttribute("post", post);
         model.addAttribute("topicId", topicId);
         return "edit-post";
+    }
+
+    @GetMapping("/my-posts")
+    public String showMyPosts(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("userTopics", this.contentService.getTopicsByAuthor(user.getLogin()));
+        model.addAttribute("userPosts", this.contentService.getPostsByAuthor(user.getLogin()));
+        return "my-posts";
     }
 }

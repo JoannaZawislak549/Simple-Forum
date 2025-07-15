@@ -42,7 +42,6 @@ public class CommonController {
 
     @GetMapping("/faq")
     public String faq() {
-
         return "faq";
     }
 

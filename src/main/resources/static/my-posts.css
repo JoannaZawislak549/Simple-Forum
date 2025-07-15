@@ -1,0 +1,95 @@
+/* my-posts.css - styl do wyświetlania tematów i postów użytkownika */
+
+body {
+    background: #f4f6fa;
+    font-family: 'MedievalSharp'
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    padding: 30px;
+}
+
+.section-title {
+    font-size: 2.1em;
+    color: #1a2340;
+    margin: 0 0 20px 0;
+    border-bottom: 2px solid #e2e6ef;
+    padding-bottom: 10px;
+}
+
+.topics-list, .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.topic-item, .post-item {
+    background: #f9fbfe;
+    border: 1px solid #e2e6ef;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(24,45,107,0.04);
+    padding: 20px;
+}
+
+.topic-title {
+    font-size: 1.4em;
+    color: #1a2340;
+    margin: 0 0 10px 0;
+}
+
+.topic-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topic-title a:hover {
+    color: #344c9a;
+}
+
+.meta-info {
+    color: #6b7a99;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    background: #ffffff;
+    border: 1px solid #e2e6ef;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    color: #1a2340;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.post-topic {
+    font-size: 1.2em;
+    color: #1a2340;
+    margin-bottom: 10px;
+}
+
+.post-topic a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-topic a:hover {
+    color: #344c9a;
+}
+
+.empty-message {
+    text-align: center;
+    color: #6b7a99;
+    font-size: 1.1em;
+    padding: 20px;
+    background: #f9fbfe;
+    border-radius: 7px;
+    margin: 10px 0;
+}
