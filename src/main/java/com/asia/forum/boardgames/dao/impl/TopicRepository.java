@@ -49,4 +49,47 @@ public class TopicRepository implements ITopicDAO {
         topics.add(topic);
     }
 
+    @Override
+    public Topic createTopic(String title, String author) {
+        Topic topic = new Topic();
+        topic.setTitle(title);
+        topic.setAuthor(author);
+        topic.setDate(LocalDateTime.now());
+        persistTopic(topic);
+        return topic;
+    }
+
+    @Override
+    public List<Topic> getTopicsByAuthor(String author) {
+        List<Topic> userTopics = new ArrayList<>();
+        for (Topic topic : topics) {
+            if (author.equals(topic.getAuthor())) {
+                userTopics.add(topic);
+            }
+        }
+
+        // Sort topics by date in descending order (most recent first), algorithm: Bubble Sort
+        for (int i = 0; i < userTopics.size() - 1; i++) {
+            for (int j = 0; j < userTopics.size() - i - 1; j++) {
+                if (userTopics.get(j).getDate().isBefore(userTopics.get(j + 1).getDate())) {
+                    Topic temp = userTopics.get(j);
+                    userTopics.set(j, userTopics.get(j + 1));
+                    userTopics.set(j + 1, temp);
+                }
+            }
+        }
+        return userTopics;
+    }
+
+    @Override
+    public List<Topic> findTopicsByTitleContaining(String query) {
+        List<Topic> matchedTopics = new ArrayList<>();
+        for (Topic topic : topics) {
+            if (topic.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                matchedTopics.add(topic);
+            }
+        }
+        return matchedTopics;
+    }
+
 }

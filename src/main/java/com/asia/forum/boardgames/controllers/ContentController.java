@@ -26,7 +26,9 @@ public class ContentController {
     }
 
     @GetMapping("/new-topic")
-    public String newTopic() {
+    public String newTopic(Model model) {
+        model.addAttribute("topic", new Topic());
+        model.addAttribute("post", new Post());
         return "new-topic";
     }
 

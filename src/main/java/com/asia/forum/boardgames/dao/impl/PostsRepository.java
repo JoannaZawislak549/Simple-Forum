@@ -2,7 +2,6 @@ package com.asia.forum.boardgames.dao.impl;
 
 import com.asia.forum.boardgames.dao.IPostDAO;
 import com.asia.forum.boardgames.model.Post;
-import com.asia.forum.boardgames.model.Topic;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -118,22 +117,6 @@ public class PostsRepository implements IPostDAO {
         this.lastPostIdPerTopic.put(4, 1);
     }
 
-
-
-    @Override
-    public void addPost(int topicId, Post post) {
-        if (!posts.containsKey(topicId)){
-            posts.put(topicId, new ArrayList<Post>());
-        }
-        posts.get(topicId).add(post);
-
-    }
-
-    @Override
-    public Post getPostById(int id) {
-        return null;
-    }
-
     @Override
     public List<Post> getAllPostsForTopicId(int topicId) {
         return posts.get(topicId);
@@ -180,35 +163,6 @@ public class PostsRepository implements IPostDAO {
     }
 
     @Override
-    public String getLastPostAuthor(int topicId){
-        Post latestPost = getLatestPostForTopicId(topicId);
-        if(latestPost != null){
-            return latestPost.getAuthor();
-        }
-        return null;
-    }
-
-    @Override
-    public HashMap<Integer, List<Post>> getAllPostsForTopics(List<Topic> topics) {
-        HashMap<Integer, List<Post>> result = new HashMap<>();
-        for (Topic topic : topics) {
-            List<Post> postsForTopic = getAllPostsForTopicId(topic.getId());
-            if (postsForTopic != null && !postsForTopic.isEmpty()) {
-                result.put(topic.getId(), postsForTopic);
-            }
-        }
-        return result;
-    }
-
-    public LocalDateTime getLastPostDate(int topicId){
-        Post latestPost = getLatestPostForTopicId(topicId);
-        if(latestPost != null) {
-            return latestPost.getDate();
-        }
-        return null;
-    }
-
-    @Override
     public void updatePost(int topicId, int postId, String newContent) {
         List<Post> topicPosts = posts.get(topicId);
         if (topicPosts != null) {
@@ -245,6 +199,56 @@ public class PostsRepository implements IPostDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public Post createPost(String content, int topicId, String author) {
+        Post post = new Post();
+        post.setTopicId(topicId);
+        post.setAuthor(author);
+        post.setContent(content);
+        post.setDate(LocalDateTime.now());
+        persistPost(post);
+        return post;
+    }
+
+    @Override
+    public List<Post> getPostsByAuthor(String author) {
+        List<Post> userPosts = new ArrayList<>();
+        for (List<Post> topicPosts : posts.values()) {
+            if (topicPosts != null) {
+                for (Post post : topicPosts) {
+                    if (author.equals(post.getAuthor())) {
+                        userPosts.add(post);
+                    }
+                }
+            }
+        }
+
+        // Sortowanie od najnowszych do najstarszych
+        for (int i = 0; i < userPosts.size() - 1; i++) {
+            for (int j = 0; j < userPosts.size() - i - 1; j++) {
+                if (userPosts.get(j).getDate().isBefore(userPosts.get(j + 1).getDate())) {
+                    Post temp = userPosts.get(j);
+                    userPosts.set(j, userPosts.get(j + 1));
+                    userPosts.set(j + 1, temp);
+                }
+            }
+        }
+        return userPosts;
+    }
+
+    @Override
+    public boolean hasPostsContaining(int topicId, String query) {
+        List<Post> topicPosts = posts.get(topicId);
+        if (topicPosts != null) {
+            for (Post post : topicPosts) {
+                if (post.getContent().toLowerCase().contains(query.toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
