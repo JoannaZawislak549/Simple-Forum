@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface IUserDAO {
     void persistUser(User user);
     Optional<User> getUserByLogin(String login);
-
+    void updateUser(User user);
 }

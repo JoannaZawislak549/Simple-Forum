@@ -2,8 +2,10 @@ package com.asia.forum.boardgames.controllers;
 
 import com.asia.forum.boardgames.model.Post;
 import com.asia.forum.boardgames.model.Topic;
+import com.asia.forum.boardgames.model.User;
 import com.asia.forum.boardgames.model.view.ViewTopic;
 import com.asia.forum.boardgames.services.IContentService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,27 +26,35 @@ public class ContentController {
     }
 
     @GetMapping("/new-topic")
-    public String newTopic(Model model) {
-        model.addAttribute("topic", new Topic());
-        model.addAttribute("post", new Post());
-        return "new-topic.html";
+    public String newTopic() {
+        return "new-topic";
     }
 
     @PostMapping("/new-topic")
-    public String newTopic(@ModelAttribute Topic topic, @ModelAttribute Post post,
-                           @RequestParam("title") String title, @RequestParam("content") String content) {
+    public String newTopic(@RequestParam("title") String title,
+                           @RequestParam("content") String content,
+                           HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
 
-        //create a new topic and post
-        this.contentService.createTopic(topic, post, title, content);
+        Topic topic = this.contentService.createTopic(title, user.getLogin());
+        this.contentService.createReply(content, topic.getId(), user.getLogin());
+
         return "redirect:/main";
     }
 
     @PostMapping("/topics/{id}/reply")
     public String replyToTopic(@PathVariable("id") int topicId,
-                               @RequestParam("content") String content) {
+                              @RequestParam("content") String content,
+                              HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
 
-        //Reply to a topic
-        this.contentService.createReply(content, topicId);
+        this.contentService.createReply(content, topicId, user.getLogin());
         return "redirect:/topics/" + topicId;
     }
 

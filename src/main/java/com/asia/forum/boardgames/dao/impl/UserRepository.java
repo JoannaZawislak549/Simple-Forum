@@ -29,7 +29,6 @@ public class UserRepository implements IUserDAO {
     public void persistUser(User user) {
         user.setId(++lastId);
         users.add(user);
-
     }
 
     @Override
@@ -40,5 +39,15 @@ public class UserRepository implements IUserDAO {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId() == user.getId()) {
+                users.set(i, user);
+                break;
+            }
+        }
     }
 }

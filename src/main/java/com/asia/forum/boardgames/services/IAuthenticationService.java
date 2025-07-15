@@ -3,6 +3,7 @@ import com.asia.forum.boardgames.model.User;
 
 public interface IAuthenticationService {
     void register(User user);
+    void registerAndLogin(User user);
     void authenticate(String login, String password);
     void logout();
 }

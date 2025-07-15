@@ -5,20 +5,15 @@ import com.asia.forum.boardgames.exceptions.UserValidationException;
 import com.asia.forum.boardgames.model.User;
 import com.asia.forum.boardgames.services.IAuthenticationService;
 import com.asia.forum.boardgames.validators.UserValidator;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final IAuthenticationService authenticationService;
-
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -27,12 +22,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, @RequestParam("password2") String password2) {
+    public String register(@ModelAttribute User user,
+                         @RequestParam("password2") String password2) {
 
         try {
             UserValidator.validateUser(user);
             UserValidator.checkIfPasswordsMatch(user.getPassword(), password2);
-            this.authenticationService.register(user);
+            this.authenticationService.registerAndLogin(user);
         } catch (UserValidationException | LoginTakenException e) {
             return "redirect:/register";
         }
@@ -42,14 +38,13 @@ public class AuthenticationController {
 
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login() {
         return "login";
     }
 
     @PostMapping("/login")
     public String login(@RequestParam("login") String login,
-                        @RequestParam("password") String password,
-                        HttpSession session) {
+                       @RequestParam("password") String password) {
         try {
             UserValidator.validateLogin(login);
             UserValidator.validatePassword(password);
@@ -58,12 +53,7 @@ public class AuthenticationController {
         }
 
         this.authenticationService.authenticate(login, password);
-        if (session.getAttribute("user") == null) {
-            return "redirect:/login";
-        }
         return "redirect:/main";
-
-
     }
 
     @GetMapping("/logout")

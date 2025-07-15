@@ -11,8 +11,8 @@ public interface IContentService {
     List<ViewTopic> showSortedTopicsByLastPost();
     ViewTopic getTopicById(int id);
     List<ViewPost> getAllPostsForTopicId(int topicId);
-    void createTopic(Topic topic, Post post, String title, String content);
-    void createReply(String content, int topicId);
+    Topic createTopic(String title, String author);
+    Post createReply(String content, int topicId, String author);
     HashMap<Integer, List<ViewPost>> getAllPostsForTopics(List<ViewTopic> topics);
     List<ViewTopic> searchTopicOrPost(String query);
 }

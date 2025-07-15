@@ -32,6 +32,14 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
+    public void registerAndLogin(User user) {
+        register(user);
+        // Po zarejestrowaniu użytkownika, pobieramy jego pełne dane z bazy (z ID)
+        Optional<User> registeredUser = this.userDAO.getUserByLogin(user.getLogin());
+        registeredUser.ifPresent(u -> session.setAttribute("user", u));
+    }
+
+    @Override
     public void authenticate(String login, String password) {
 
         Optional<User> userBox = this.userDAO.getUserByLogin(login);
@@ -43,6 +51,6 @@ public class AuthenticationService implements IAuthenticationService {
 
     @Override
     public void logout() {
-
+        session.removeAttribute("user");
     }
 }

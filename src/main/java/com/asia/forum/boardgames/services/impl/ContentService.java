@@ -4,7 +4,6 @@ import com.asia.forum.boardgames.dao.IPostDAO;
 import com.asia.forum.boardgames.dao.ITopicDAO;
 import com.asia.forum.boardgames.model.Post;
 import com.asia.forum.boardgames.model.Topic;
-import com.asia.forum.boardgames.model.User;
 import com.asia.forum.boardgames.model.view.ViewPost;
 import com.asia.forum.boardgames.model.view.ViewTopic;
 import com.asia.forum.boardgames.services.IContentService;
@@ -15,16 +14,15 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class ContentService implements IContentService {
     private final ITopicDAO topicDAO;
     private final IPostDAO postDAO;
-
     @Autowired
     private HttpSession session;
 
@@ -75,31 +73,24 @@ public class ContentService implements IContentService {
     }
 
     @Override
-    public void createTopic(Topic topic, Post post, String title, String content) {
+    public Topic createTopic(String title, String author) {
+        Topic topic = new Topic();
         topic.setTitle(title);
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            topic.setAuthor(user.getLogin());
-        }
-        topic.setDate(java.time.LocalDateTime.now());
+        topic.setAuthor(author);
+        topic.setDate(LocalDateTime.now());
         this.topicDAO.persistTopic(topic);
-        post.setTopicId(topic.getId());
-        post.setAuthor(topic.getAuthor());
-        post.setDate(java.time.LocalDateTime.now());
-        post.setContent(content);
-        this.postDAO.persistPost(post);
+        return topic;
     }
 
     @Override
-    public void createReply(String content, int topicId) {
+    public Post createReply(String content, int topicId, String author) {
         Post post = new Post();
         post.setTopicId(topicId);
-        User user = (User) session.getAttribute("user");
-        String author = user.getLogin();
         post.setAuthor(author);
-        post.setDate(java.time.LocalDateTime.now());
         post.setContent(content);
+        post.setDate(LocalDateTime.now());
         this.postDAO.persistPost(post);
+        return post;
     }
 
     @Override
